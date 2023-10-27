@@ -1,32 +1,22 @@
-#include "holberton.h"
+#include "main.h"
+
 /**
- * binary_to_uint - Entry Point
- * @b: const char
- * Return: 0
+ * binary_to_uint - binary numbers to uint
+ * @b: binary
+ *
+ * Return: unsigned int
  */
 unsigned int binary_to_uint(const char *b)
 {
-	unsigned int res = 0;
-	int base = 1, i = 0;
+	unsigned int uint = 0;
 
-	if (b == NULL)
+	if (!b)
 		return (0);
-
-	while (b[i + 1])
+	while (*b)
 	{
-		if (b[i] != '0' && b[i] != '1')
+		if (*b != '0' && *b != '1')
 			return (0);
-		i++;
+		uint = uint * 2 + (*b++ - '0');
 	}
-
-	while (i >= 0)
-	{
-		res += ((b[i] - '0') * base);
-		base *= 2;
-		i--;
-	}
-
-
-	return (res);
-
+	return (uint);
 }
