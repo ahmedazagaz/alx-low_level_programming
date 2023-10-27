@@ -1,12 +1,13 @@
-#include "holberton.h"
+#include "main.h"
+
 /**
- * get_endianness - return the endianness of the machine
- *
- * Return: 0 for big endian, 1 for little endian
+ * get_endianness - the endianness
+ * Return: 0 or 1
  */
 int get_endianness(void)
 {
-	int n = 1;
+	unsigned int c = 1;
+	char *endiantype = (char *)&c;
 
-	return (*((char *) &n) + '0');
+	return (*endiantype);
 }
