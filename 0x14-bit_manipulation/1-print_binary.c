@@ -1,31 +1,34 @@
-#include "holberton.h"
-#include <unistd.h>
-#include <limits.h>
+#include "main.h"
+
 /**
- * print_binary - print an unsigned int in binary
- *
- * @n:
- *
- * Return: void
+ * print_binary - number to binary
+ * @n: the number
  */
 void print_binary(unsigned long int n)
 {
-	unsigned long int printbit = 1ul << 63;
-	char c = '0';
+	int shifting = sizeof(unsigned long int) * 8 - 1;
+	int flag = 0;
+	unsigned long int bit;
 
-	while (!(printbit & n) && printbit != 0)
-		printbit = printbit >> 1;
-
-	if (printbit == 0)
-		write(1, &c, 1);
-
-	while (printbit)
+	if (n == 0)
 	{
-		if (printbit & n)
-			c = '1';
-		else
-			c = '0';
-		write(1, &c, 1);
-		printbit = printbit >> 1;
+		putchar('0');
+		return;
+	}
+
+	while (shifting >= 0)
+	{
+		bit = n >> shifting;
+
+		if (bit & 1)
+		{
+			putchar('1');
+			flag = 1;
+		}
+		else if (flag)
+		{
+			putchar('0');
+		}
+		shifting--;
 	}
 }

@@ -1,15 +1,16 @@
-#include "holberton.h"
+#include "main.h"
+
 /**
- * clear_bit - Entry Point
- * @n: input
- * @index: index
- * Return: 0
+ * clear_bit - set to 0
+ * @n: the binary number
+ * @index: The index
+ * Return: 1 or -1
  */
-	int clear_bit(unsigned long int *n, unsigned int index)
+int clear_bit(unsigned long int *n, unsigned int index)
 {
-	if (index > 63)
+	if (index >= (sizeof(unsigned long int) * 8))
 		return (-1);
 
-	*n = *n & ~(1ul << index);
+	*n = *n & ~(1UL << index);
 	return (1);
 }

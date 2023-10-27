@@ -1,17 +1,16 @@
-#include "holberton.h"
+#include "main.h"
+
 /**
- * get_bit - Entry Point
- * @n: input
- * @index: index
- * Return: 0
+ * get_bit - get the bit
+ * @n: binary
+ * @index: the index
+ *
+ * Return: 1 or -1
  */
 int get_bit(unsigned long int n, unsigned int index)
 {
-	unsigned long int m;
-
-	if (index > 63)
+	if (index >= sizeof(n) * 8)
 		return (-1);
 
-	m = 1 << index;
-	return ((n & m) > 0);
+	return (n >> index & 1);
 }
