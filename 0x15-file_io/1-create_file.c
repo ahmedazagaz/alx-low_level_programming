@@ -1,50 +1,38 @@
 #include "main.h"
 
 /**
- * _strlen - compute the length of a NULL-terminated string
- * @str: the string to measure
+ * create_file - creates a file
+ * @filename: filename.
+ * @text_content: content writed in the file.
  *
- * Return: the length of str, or -1 if str is NULL
- */
-ssize_t _strlen(const char *str)
-{
-	ssize_t len = 0;
-
-	if (!str)
-		return (-1);
-
-	while (*str++)
-		++len;
-
-	return (len);
-}
-
-/**
- * create_file - create a file
- * @filename: the name of the file to create
- * @text_content: the data to write to filename
- *
- * Return: Upon success, return 1. Otherwise, return -1.
+ * Return: 1 if it success. -1 if it fails.
  */
 int create_file(const char *filename, char *text_content)
 {
-	ssize_t b_written = 0;
 	int fd;
+	int nletters;
+	int rwr;
 
 	if (!filename)
 		return (-1);
 
-	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+	fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0600);
 
-	if (fd < 0)
+	if (fd == -1)
 		return (-1);
 
-	if (text_content)
-		b_written = write(fd, text_content, _strlen(text_content));
+	if (!text_content)
+		text_content = "";
+
+	for (nletters = 0; text_content[nletters]; nletters++)
+		;
+
+	rwr = write(fd, text_content, nletters);
+
+	if (rwr == -1)
+		return (-1);
 
 	close(fd);
 
-	if (b_written < 0)
-		return (-1);
 	return (1);
 }
