@@ -8,13 +8,13 @@ hash_table_t *hash_table_create(unsigned long int size)
 {
 	hash_table_t *htable;
 
-	htable = calloc(sizeof(hash_table_t));
+	htable = malloc(sizeof(hash_table_t));
 	if (htable == NULL)
 	{
 		return (NULL);
 	}
 	htable->size = size;
-	htable->array = calloc(sizeof(hash_node_t *) * size);
+	htable->array = malloc(sizeof(hash_node_t *) * size);
 	if (htable->array == NULL)
 	{
 		free(htable);
